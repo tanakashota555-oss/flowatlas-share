@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1d63e9">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>FlowAtlas 自分用版</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--ink:#152033;--muted:#667085;--line:#dfe5ee;--blue:#1d63e9;--blue-soft:#edf4ff;--ok:#16865b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.top{height:62px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(18px,calc((100vw - 1040px)/2))}.brand{font-size:18px;font-weight:750}.brand span{color:var(--blue)}.nav{display:flex;gap:8px}.nav button{border:0;background:transparent;color:var(--muted);padding:8px 11px;border-radius:8px}.nav button.active{background:var(--blue-soft);color:var(--blue);font-weight:650}.page{max-width:1040px;margin:auto;padding:42px 20px 72px}.view{display:none}.view.active{display:block}.hero{max-width:700px;margin:22px auto 42px;text-align:center}.hero h1{font-size:clamp(32px,6vw,48px);letter-spacing:-1.7px;margin:0 0 12px}.hero p{color:var(--muted);margin:0 0 25px}.search{display:flex;gap:8px}.search input{flex:1;padding:16px;border:1px solid var(--line);border-radius:12px;outline-color:var(--blue);font-size:16px}.primary,.secondary{border-radius:9px;padding:10px 14px;font-weight:650}.primary{border:0;background:var(--blue);color:#fff}.secondary{border:1px solid var(--line);background:#fff;color:var(--ink)}h2{font-size:20px;margin:0 0 14px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;align-items:flex-start;min-height:150px}.card:hover{border-color:#bcd1fb;box-shadow:0 8px 22px #142e5c0d}.card h3{font-size:16px;margin:12px 0 7px}.card p{font-size:14px;color:var(--muted);line-height:1.55;margin:0 0 16px}.card button{margin-top:auto}.muted{color:var(--muted)}.back{border:0;background:transparent;color:var(--muted);padding:0 0 16px}.head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:16px}.head h1{margin:0;font-size:28px}.region{background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}.current{background:var(--ink);color:#fff;padding:18px;border-radius:14px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:14px}.current small{opacity:.75}.current h2{margin:4px 0 0;color:#fff}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions .secondary{background:#ffffff12;border-color:#ffffff50;color:#fff}.timeline{max-width:780px}.step{position:relative;padding:0 0 14px 40px}.step:before{content:"";position:absolute;left:14px;top:28px;width:2px;height:calc(100% - 4px);background:var(--line)}.step:last-child:before{display:none}.dot{position:absolute;left:5px;top:5px;width:20px;height:20px;border-radius:50%;border:2px solid #bdc6d4;background:var(--bg);z-index:1}.step.done .dot{background:var(--ok);border-color:var(--ok)}.step.done .dot:after{content:"✓";color:#fff;position:absolute;font-size:13px;top:-1px;left:4px}.step.current .dot{border-color:var(--blue);box-shadow:0 0 0 5px #1d63e922}.stepbox{background:#fff;border:1px solid var(--line);border-radius:12px}.step.current .stepbox{border-color:#b6cdfa}.step-title{width:100%;border:0;background:transparent;color:var(--ink);padding:15px;text-align:left;display:flex;justify-content:space-between;align-items:center;font-weight:650}.detail{display:none;border-top:1px solid var(--line);padding:0 15px 15px}.step.open .detail{display:block}.section{border-bottom:1px solid var(--line)}.section:last-child{border:0}.section button{width:100%;border:0;background:transparent;color:var(--ink);padding:14px 0;text-align:left;display:flex;justify-content:space-between;font-weight:600}.section .body{display:none;padding:0 0 14px;color:#475467;font-size:14px;line-height:1.7}.section.open .body{display:block}.check{display:block;padding:5px 0}.source{background:#fafbfc;border:1px solid var(--line);border-radius:9px;padding:10px;margin-top:8px}.source strong{display:block;color:var(--ink)}.source a{color:var(--blue);font-size:13px}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px}.panel h2{margin-bottom:8px}.list-row{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid var(--line);padding:13px 0}.list-row:first-of-type{border-top:0}.list-row p{margin:3px 0 0;font-size:13px;color:var(--muted)}.danger{color:#b42318}.notice{padding:11px 13px;background:var(--blue-soft);border-left:3px solid var(--blue);border-radius:6px;color:#243a62;font-size:14px;line-height:1.6;margin-bottom:14px}dialog{border:0;border-radius:14px;width:min(460px,calc(100% - 32px));padding:22px;box-shadow:0 20px 65px #0004}dialog::backdrop{background:#15203366}dialog h2{margin:0 0 10px}.field{margin:13px 0}.field label{display:block;font-size:14px;font-weight:650;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;outline-color:var(--blue)}.right{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.toast{display:none;position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 15px;border-radius:9px;z-index:10}.toast.show{display:block}@media(max-width:680px){.page{padding:28px 15px 60px}.cards{grid-template-columns:1fr}.head,.current,.region{display:block}.current .actions,.region button{margin-top:12px}.nav button:last-child{display:none}.list-row{align-items:flex-start;flex-direction:column}}
+    /* Primary data-safety action: make backups unmistakable. */
+    #exportData{background:#1d63e9 !important;border-color:#1d63e9 !important;color:#fff !important;box-shadow:0 3px 8px #1d63e933}
+    #exportData:hover{background:#1552c7 !important;border-color:#1552c7 !important}
+    /* Visual consistency pass: the current-step panel uses the same light card system as every other page. */
+    .current{background:transparent !important;color:var(--ink) !important;border:0 !important;box-shadow:none !important;padding:0 0 14px !important;margin:0 0 14px !important}
+    .current h2{color:var(--ink) !important}
+    .current small{color:var(--muted) !important;opacity:1 !important}
+    /* A current item is identified by its timeline marker only; its card stays consistent with the other steps. */
+    .step.current .stepbox{border-color:var(--line) !important;box-shadow:none !important}
+    /* Secondary buttons must remain readable outside the current-step panel. */
+    .actions .secondary{background:#fff !important;border-color:var(--line) !important;color:var(--ink) !important}
+    .actions .secondary:hover{background:#f7f9fc !important;border-color:#b6cdfa !important}
+    #importData{border-color:#1d63e9 !important;color:#1d63e9 !important;background:#fff !important}
+    .panel,.region,.stepbox,.card{box-shadow:0 2px 8px #15203308}
+    @media(max-width:680px){.nav{gap:2px;overflow-x:auto}.nav button{white-space:nowrap;padding:8px 9px;font-size:13px}.nav button:last-child{display:block}.top{padding:0 12px}.brand{font-size:16px}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="brand">Flow<span>Atlas</span></div><nav class="nav"><button data-view="home" class="active">探す</button><button data-view="private">非公開フォルダ</button><button data-view="sources">公式資料</button></nav></header>
+  <script>
+    // Navigation labels are intentionally explicit for first-time users.
+    document.querySelector('[data-view="home"]').textContent = '検索';
+    document.querySelector('[data-view="private"]').textContent = '自社用フロー';
+    document.querySelector('[data-view="sources"]').textContent = '公式資料管理';
+  </script>
+  <main class="page">
+    <section id="home" class="view active"><div class="hero"><h1>次にやることが、わかる。</h1><p>自分の仕事を、一歩ずつ進めるためのフローです。</p><div class="search"><input id="search" placeholder="例：新築住宅を設計する"><button id="searchGo" class="primary">開く</button></div></div><section id="recentWrap" style="display:none"><h2>フロー一覧</h2><p class="muted">この端末で最近開いたフロー</p><div id="recentList" class="cards"></div></section><h2>よく見られているフロー</h2><div class="cards"><article class="card"><span style="font-size:26px">🏠</span><h3>新築住宅を設計する</h3><p>企画から引き渡しまでを確認します。</p><button class="primary open-flow">フローを開く</button></article></div><p class="muted" style="font-size:12px;text-align:center">重要な判断は必ず公式情報をご確認ください。</p></section>
+    <section id="workflow" class="view"><button class="back" data-view="home">← 検索に戻る</button><div class="head"><div><h1>新築住宅を設計する</h1><p class="muted" id="updated"></p></div></div><div class="region"><div><strong id="regionText">対象地域：未設定</strong><br><span class="muted" id="conditionText">建物条件：未設定</span></div><button id="setConditions" class="secondary">地域・建物条件を設定</button></div><div class="current" style="background:#fff;color:#152033;border:1px solid #dfe5ee;box-shadow:none"><div><small style="color:#667085;opacity:1">現在のステップ</small><h2 id="currentTitle" style="color:#152033">法規調査</h2></div><div class="actions"><button id="startAt" class="secondary">途中から始める</button><button id="copyPrivate" class="secondary">自社用にコピー</button></div></div><div id="timeline" class="timeline"></div><div class="notice">このフローは参考情報です。法令、条例、申請の要否、必要図書は地域や建物条件により異なります。重要な判断や申請前には、国・自治体・指定確認検査機関などの公式情報を必ず確認してください。</div></section>
+    <section id="private" class="view"><div class="head"><div><h1>非公開フォルダ</h1><p class="muted">この端末だけに保存される自分用のフローです。</p></div></div><div class="actions" style="margin-bottom:18px"><button id="exportData" class="secondary">バックアップを書き出す</button><button id="importData" class="secondary">バックアップを復元</button><input id="importFile" type="file" accept="application/json,.json" hidden></div><div id="privateList" class="cards"></div></section>
+    <section id="sources" class="view"><div class="head"><div><h1>公式資料</h1><p class="muted">自分用フローに使う公式資料を管理します。</p></div></div><div class="panel"><h2>資料を追加</h2><div class="notice">自分用でも、国・自治体などの公式URLを使うことをおすすめします。</div><div class="field"><label>資料名</label><input id="sourceName" placeholder="例：国土交通省 建築確認の案内"></div><div class="field"><label>公式URL</label><input id="sourceUrl" placeholder="https://..."></div><button id="addSource" class="primary">追加する</button></div><div id="sourceList" class="panel"></div></section>
+  </main>
+  <dialog id="conditionDialog"><h2>地域・建物条件を設定</h2><div class="field"><label>都道府県</label><select id="prefecture"><option value="">未設定</option></select></div><div class="field"><label>市区町村（任意）</label><input id="city" placeholder="例：大阪市"></div><div class="field"><label>工事種別</label><select id="projectType"><option value="">未設定</option><option>新築</option><option>増築</option><option>改築</option><option>大規模な修繕・模様替</option></select></div><div class="field"><label>主な用途</label><select id="buildingUse"><option value="">未設定</option><option>戸建住宅</option><option>店舗併用住宅</option><option>共同住宅</option><option>その他</option></select></div><div class="field"><label>構造・階数</label><div style="display:flex;gap:8px"><select id="structure"><option value="">構造未設定</option><option>木造</option><option>鉄骨造</option><option>鉄筋コンクリート造</option><option>その他</option></select><select id="floors"><option value="">階数未設定</option><option>平屋</option><option>2階建て</option><option>3階建て以上</option></select></div></div><div class="field"><label>補足メモ（任意）</label><textarea id="conditionMemo" placeholder="例：狭小地、既存擁壁あり"></textarea></div><div class="right"><button class="secondary close-dialog">キャンセル</button><button id="saveConditions" class="primary">保存する</button></div></dialog>
+  <dialog id="startDialog"><h2>どこから始めますか？</h2><p class="muted">完了済みの工程を選ぶと、その次から案内します。</p><div class="field"><select id="startSelect"></select></div><div class="right"><button class="secondary close-dialog">キャンセル</button><button id="applyStart" class="primary">ここから始める</button></div></dialog>
+  <div id="toast" class="toast"></div>
+  <script>
+    const key='flowatlas-self-use-v1';
+    const steps=[
+      {title:'ヒアリング',items:['要望・優先順位を整理する','予算と希望時期を整理する','設計・工事監理の範囲を確認する'],summary:'建築主の希望と業務範囲を整理します。',source:{org:'国土交通省',title:'建築士法関連情報',url:'https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000083.html'}},
+      {title:'敷地調査',items:['現地・道路・周辺環境を確認する','インフラと境界資料を確認する','自治体の都市計画情報を確認する'],summary:'敷地条件を確認し、設計の前提を整えます。',source:{org:'国土交通省',title:'建築確認・検査の対象となる建築物の規模等の見直し',url:'https://www.mlit.go.jp/jutakukentiku/build/r4kaisei_kijunhou0001.html'}},
+      {title:'法規調査',items:['用途地域を確認する','建ぺい率・容積率を確認する','接道条件を確認する','防火・準防火地域を確認する','地区計画・条例を確認する'],summary:'対象地域の都市計画・建築関係の条件を確認します。',source:{org:'e-Gov法令検索',title:'e-Gov法令検索',url:'https://elaws.e-gov.go.jp/'}},
+      {title:'基本設計',items:['配置・平面・立面の基本方針を作る','構造・設備の基本方針を整理する','省エネ設計条件を確認する','概算工事費と予算を確認する'],summary:'法規調査を前提に、建物の基本方針を固めます。',source:{org:'国土交通省',title:'省エネ基準適合義務の対象拡大について',url:'https://www.mlit.go.jp/jutakukentiku/house/01.html'}},
+      {title:'実施設計',items:['確認申請・施工に必要な図書を整理する','構造・設備・省エネの図書を確認する','仕様書・仕上表・詳細図を整える','提出先の手引きと整合を確認する'],summary:'申請・施工・監理に必要な図書を具体化します。',source:{org:'国土交通省',title:'建築士法関連情報',url:'https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000083.html'}},
+      {title:'確認申請',items:['申請先を確認する','地域・規模・構造に応じた要否を確認する','提出図書と添付書類を確認する','確認済証を得る前に着工しない'],summary:'建築確認の必要書類と申請先を最新の公式案内で確認します。',source:{org:'国土交通省',title:'建築確認・検査の対象となる建築物の規模等の見直し',url:'https://www.mlit.go.jp/jutakukentiku/build/r4kaisei_kijunhou0001.html'}},
+      {title:'着工・工事監理',items:['契約図書・最新図面を共有する','工事監理の方法と記録を整理する','中間検査の要否・時期を確認する','変更・是正を記録する'],summary:'設計図書との照合・確認を案件に応じて行います。',source:{org:'国土交通省',title:'工事監理ガイドライン',url:'https://www.mlit.go.jp/jutakukentiku/house/jutakukentiku_house_fr_000019.html'}},
+      {title:'完了検査・引き渡し',items:['完了検査の要否・必要書類を確認する','申請内容と現場の整合を確認する','検査済証などを保管する','引き渡し図書を整理する'],summary:'完了検査と引き渡しに必要な書類を整理します。',source:{org:'国土交通省',title:'建築確認・検査の対象となる建築物の規模等の見直し',url:'https://www.mlit.go.jp/jutakukentiku/build/r4kaisei_kijunhou0001.html'}}
+    ];
+    const defaultState={recent:[],current:2,checks:{},conditions:{},privateFlows:[],sources:[{name:'国土交通省 建築確認・検査',url:'https://www.mlit.go.jp/jutakukentiku/build/r4kaisei_kijunhou0001.html'},{name:'e-Gov法令検索',url:'https://elaws.e-gov.go.jp/'}]};
+    let state=load();
+    function load(){try{return {...defaultState,...JSON.parse(localStorage.getItem(key)||'{}')}}catch{return structuredClone(defaultState)}}
+    function save(){localStorage.setItem(key,JSON.stringify(state))}
+    function toast(message){const e=document.getElementById('toast');e.textContent=message;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2200)}
+    function show(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===id));window.scrollTo(0,0)}
+    document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>show(b.dataset.view));
+    document.querySelectorAll('.close-dialog').forEach(b=>b.onclick=()=>b.closest('dialog').close());
+    function currentIndex(){return Math.min(state.current,steps.length-1)}
+    function renderWorkflow(){
+      document.getElementById('currentTitle').textContent=steps[currentIndex()].title;
+      document.getElementById('updated').textContent='最終更新：2026年7月12日';
+      const c=state.conditions||{};const parts=[c.prefecture,c.city,c.projectType,c.use,c.structure,c.floors].filter(Boolean);document.getElementById('regionText').textContent='対象地域：'+([c.prefecture,c.city].filter(Boolean).join(' ')||'未設定');document.getElementById('conditionText').textContent='建物条件：'+(parts.slice(2).join('・')||'未設定')+(c.memo?' ／ '+c.memo:'');
+      const t=document.getElementById('timeline');t.replaceChildren();
+      steps.forEach((step,i)=>{const article=document.createElement('article');article.className='step '+(i<state.current?'done ':'');article.innerHTML='<span class="dot"></span><div class="stepbox"><button class="step-title"><span>'+step.title+'</span><span>⌄</span></button><div class="detail"></div></div>';const title=article.querySelector('.step-title');const detail=article.querySelector('.detail');title.onclick=()=>article.classList.toggle('open');
+        const required=section('📄 必要な確認項目',true);step.items.forEach((item,n)=>{const label=document.createElement('label');label.className='check';const box=document.createElement('input');box.type='checkbox';const k=i+':'+n;box.checked=!!state.checks[k];box.onchange=()=>{state.checks[k]=box.checked;save();updateStepProgress(i)};label.append(box,' '+item);required.body.appendChild(label)});detail.appendChild(required.el);
+        detail.appendChild(section('📖 解説',false,step.summary).el);detail.appendChild(section('⚠️ よくあるミス',false,'対象地域・建物条件により必要な確認事項が変わります。古い資料や非公式情報だけで判断しないようにします。').el);
+        const sources=section('🏛️ 公式資料',false);const note=document.createElement('p');note.textContent='本項目は参考情報です。重要な判断や申請前には、必ず公式情報を確認してください。';sources.body.appendChild(note);sources.body.appendChild(sourceCard(step.source));detail.appendChild(sources.el);t.appendChild(article);
+      });
+    }
+    function section(title,open,text){const el=document.createElement('div');el.className='section '+(open?'open':'');const button=document.createElement('button');button.innerHTML='<span>'+title+'</span><span>'+(open?'⌃':'⌄')+'</span>';const body=document.createElement('div');body.className='body';if(text)body.textContent=text;button.onclick=()=>{el.classList.toggle('open');button.lastChild.textContent=el.classList.contains('open')?'⌃':'⌄'};el.append(button,body);return {el,body}}
+    function sourceCard(source){const c=document.createElement('div');c.className='source';const name=document.createElement('strong');name.textContent=source.org;const link=document.createElement('a');link.href=source.url;link.target='_blank';link.rel='noopener';link.textContent=source.title+' を開く ↗';c.append(name,link);return c}
+    function updateStepProgress(i){if(steps[i].items.every((_,n)=>state.checks[i+':'+n]))state.current=Math.max(state.current,Math.min(i+1,steps.length-1));save();renderWorkflow()}
+    function openFlow(){state.recent=['新築住宅を設計する',...state.recent.filter(x=>x!=='新築住宅を設計する')].slice(0,4);save();renderRecent();renderWorkflow();show('workflow')}
+    document.querySelectorAll('.open-flow').forEach(b=>b.onclick=openFlow);document.getElementById('searchGo').onclick=openFlow;document.getElementById('search').onkeydown=e=>{if(e.key==='Enter')openFlow()};
+    function renderRecent(){const wrap=document.getElementById('recentWrap'),list=document.getElementById('recentList');list.replaceChildren();wrap.style.display=state.recent.length?'block':'none';state.recent.forEach(title=>{const card=document.createElement('article');card.className='card';card.innerHTML='<span style="font-size:26px">🏠</span><h3></h3><p>前回の続きから確認できます。</p>';card.querySelector('h3').textContent=title;const b=document.createElement('button');b.className='primary';b.textContent='フローを開く';b.onclick=openFlow;card.appendChild(b);list.appendChild(card)})}
+    const prefectures=['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];const pref=document.getElementById('prefecture');prefectures.forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;pref.appendChild(o)});
+    document.getElementById('setConditions').onclick=()=>{const c=state.conditions||{};pref.value=c.prefecture||'';document.getElementById('city').value=c.city||'';document.getElementById('projectType').value=c.projectType||'';document.getElementById('buildingUse').value=c.use||'';document.getElementById('structure').value=c.structure||'';document.getElementById('floors').value=c.floors||'';document.getElementById('conditionMemo').value=c.memo||'';document.getElementById('conditionDialog').showModal()};document.getElementById('saveConditions').onclick=()=>{state.conditions={prefecture:pref.value,city:document.getElementById('city').value.trim(),projectType:document.getElementById('projectType').value,use:document.getElementById('buildingUse').value,structure:document.getElementById('structure').value,floors:document.getElementById('floors').value,memo:document.getElementById('conditionMemo').value.trim()};save();document.getElementById('conditionDialog').close();renderWorkflow();toast('条件を保存しました')};
+    document.getElementById('startAt').onclick=()=>{const s=document.getElementById('startSelect');s.replaceChildren();steps.forEach((step,i)=>{const o=document.createElement('option');o.value=i;o.textContent=step.title+'から始める';s.appendChild(o)});s.value=state.current;document.getElementById('startDialog').showModal()};document.getElementById('applyStart').onclick=()=>{state.current=Number(document.getElementById('startSelect').value);save();document.getElementById('startDialog').close();renderWorkflow()};
+    document.getElementById('copyPrivate').onclick=()=>{state.privateFlows.unshift({id:String(Date.now()),title:'新築住宅を設計する（自社用）',data:{checks:state.checks,conditions:state.conditions}});save();renderPrivate();show('private');toast('非公開フローにコピーしました')};
+    function renderPrivate(){const list=document.getElementById('privateList');list.replaceChildren();if(!state.privateFlows.length){const p=document.createElement('p');p.className='muted';p.textContent='まだ非公開フローはありません。公開フローからコピーして作成できます。';list.appendChild(p)}state.privateFlows.forEach(flow=>{const card=document.createElement('article');card.className='card';card.innerHTML='<span style="font-size:26px">🔒</span><h3></h3><p>この端末だけで使うフローです。</p>';card.querySelector('h3').textContent=flow.title;const open=document.createElement('button');open.className='secondary';open.textContent='開いて編集する';open.onclick=()=>{state.checks=flow.data?.checks||{};state.conditions=flow.data?.conditions||{};save();openFlow()};const rename=document.createElement('button');rename.className='secondary';rename.style.marginTop='8px';rename.textContent='名前を変更';rename.onclick=()=>{const n=prompt('フロー名',flow.title);if(n?.trim()){flow.title=n.trim();save();renderPrivate()}};const del=document.createElement('button');del.className='secondary';del.style.margin='8px 0 0 8px';del.textContent='削除';del.onclick=()=>{if(confirm('削除しますか？')){state.privateFlows=state.privateFlows.filter(x=>x.id!==flow.id);save();renderPrivate()}};card.append(open,rename,del);list.appendChild(card)})}
+    function renderSources(){const list=document.getElementById('sourceList');list.replaceChildren();state.sources.forEach((source,i)=>{const row=document.createElement('div');row.className='list-row';const d=document.createElement('div');const title=document.createElement('strong');title.textContent=source.name;const url=document.createElement('p');url.textContent=source.url;d.append(title,url);const del=document.createElement('button');del.className='secondary';del.textContent='削除';del.onclick=()=>{state.sources.splice(i,1);save();renderSources()};row.append(d,del);list.appendChild(row)})}document.getElementById('addSource').onclick=()=>{const name=document.getElementById('sourceName').value.trim(),url=document.getElementById('sourceUrl').value.trim();try{const u=new URL(url);if(!name||!/^https?:$/.test(u.protocol))throw Error();state.sources.unshift({name,url:u.href});save();renderSources();document.getElementById('sourceName').value='';document.getElementById('sourceUrl').value='';toast('公式資料を追加しました')}catch{toast('資料名とhttp(s) URLを入力してください')}};
+    document.getElementById('exportData').onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='flowatlas-self-use-backup.json';a.click();URL.revokeObjectURL(url)};document.getElementById('importData').onclick=()=>document.getElementById('importFile').click();document.getElementById('importFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const next=JSON.parse(await f.text());if(!confirm('現在のデータをバックアップ内容で置き換えますか？'))return;state={...defaultState,...next};save();renderRecent();renderPrivate();renderSources();toast('バックアップを復元しました')}catch{toast('有効なバックアップファイルを選択してください')}finally{e.target.value=''}};
+    renderRecent();renderPrivate();renderSources();renderWorkflow();
+  </script>
+  <script>
+    /* AI draft library: useful starting points, never a substitute for official rules or professional advice. */
+    var officialSources={
+      mlit:{org:'国土交通省',title:'国土交通省 公式サイト',url:'https://www.mlit.go.jp/'},
+      mhlw:{org:'厚生労働省',title:'厚生労働省 公式サイト',url:'https://www.mhlw.go.jp/'},
+      police:{org:'警察庁',title:'警察庁 公式サイト',url:'https://www.npa.go.jp/'},
+      env:{org:'環境省',title:'環境省 公式サイト',url:'https://www.env.go.jp/'},
+      moj:{org:'法務省',title:'法務省 公式サイト',url:'https://www.moj.go.jp/'},
+      nta:{org:'国税庁',title:'国税庁 公式サイト',url:'https://www.nta.go.jp/'},
+      egov:{org:'e-Gov法令検索',title:'e-Gov法令検索',url:'https://elaws.e-gov.go.jp/'}
+    };
+    var originalBuildingSteps=JSON.parse(JSON.stringify(steps));
+    /* Small items are AI-produced work prompts. Confirm local rules, deadlines and documents with official sources. */
+    var draftSmallItems={
+      renovation:[
+        ['現状の不満・優先順位を聞き取る','予算上限と資金の出所を整理する','居住しながら工事するかを決める'],
+        ['既存図面・竣工図の有無を確認する','劣化・漏水・設備状況を調査する','共用部・近隣への影響を確認する'],
+        ['建築基準法上の扱いを確認する','マンション管理規約を確認する','補助金・省エネ要件を確認する'],
+        ['平面・仕上げ・設備の方針を決める','優先順位に応じて減額案を作る','施主の承認範囲を決める'],
+        ['見積条件をそろえて比較する','工期・支払条件・保証内容を確認する','契約図書と仕様書を整理する'],
+        ['着工前の近隣説明を行う','工程・変更内容を記録する','中間・完了時に施工を確認する'],
+        ['設備の試運転を確認する','取扱説明書・保証書を受領する','残工事・是正事項を確認する']
+      ],
+      'store-design':[
+        ['業態・客層・客単価を整理する','必要席数・厨房規模を決める','出店予算と開店時期を設定する'],
+        ['現地寸法・既存設備を調べる','給排水・電気・ガス容量を確認する','搬入動線・避難動線を確認する'],
+        ['用途変更の要否を確認する','消防・保健所の事前相談を行う','看板・道路使用などのルールを確認する'],
+        ['レイアウト・客導線を検討する','厨房・バックヤードを計画する','ブランドに合う内装方針を決める'],
+        ['詳細図・設備図を作成する','工事区分と見積範囲を整理する','施工会社・工期を調整する'],
+        ['必要な届出を行う','現場で仕様・工程を確認する','消防・保健所検査に備える'],
+        ['設備・什器の動作を確認する','清掃・運用マニュアルを整える','開店前の残工事を是正する']
+      ],
+      'building-confirmation':[
+        ['敷地・用途・規模を確定する','確認申請の要否を整理する','関係法令の適用範囲を確認する'],
+        ['配置図・平面図・立面図を整理する','構造・設備に必要な図書を確認する','委任状などの添付書類を確認する'],
+        ['指定確認検査機関を選定する','手数料・受付方法を確認する','事前相談の要否を確認する'],
+        ['申請書の記載を確認する','図書間の整合を確認する','必要な計算書・証明書を添付する'],
+        ['補正依頼の内容を記録する','設計変更の影響を確認する','補正図書を期限内に提出する'],
+        ['確認済証の内容を確認する','着工時の届出を確認する','現場に必要図書を引き継ぐ']
+      ],
+      restaurant:[
+        ['業態・メニュー・営業時間を決める','初期費用と運転資金を試算する','個人か法人かを決める'],
+        ['物件用途・契約条件を確認する','厨房・客席・手洗い設備を確認する','給排水・換気・ガス容量を確認する'],
+        ['保健所へ図面を持参して相談する','食品衛生責任者の要件を確認する','営業許可の必要書類を整理する'],
+        ['消防署へ設備・収容人員を相談する','深夜営業・酒類提供の届出を確認する','自治体独自の手続きを確認する'],
+        ['税務署への届出を準備する','従業員がいる場合の労務手続きを確認する','会計・決済・仕入れ体制を整える'],
+        ['営業許可証を確認する','開店前の衛生・防火チェックを行う','表示・メニュー・価格を最終確認する']
+      ],
+      cafe:[
+        ['提供商品・席数・営業時間を決める','開業資金と損益計画を作る','テイクアウトの有無を決める'],
+        ['物件の用途・管理規約を確認する','客席・厨房・手洗いの配置を確認する','電気・給排水・排気設備を確認する'],
+        ['保健所に平面図を相談する','食品衛生責任者を確保する','営業許可に必要な設備を確認する'],
+        ['消防設備・避難経路を確認する','看板・屋外広告のルールを確認する','深夜営業の届出を確認する'],
+        ['開業届・青色申告の準備をする','仕入先・POS・決済を選定する','採用・シフト・衛生管理を整える'],
+        ['保健所検査の日程を確認する','機器・什器を試運転する','プレオープンで運用を確認する']
+      ],
+      retail:[
+        ['商品構成・価格帯を決める','売上目標と固定費を試算する','販売形態を決める'],
+        ['立地・商圏・競合を調査する','賃貸借契約条件を確認する','在庫保管スペースを確認する'],
+        ['特定商取引法などを確認する','中古品なら古物商許可を確認する','食品・化粧品等の規制を確認する'],
+        ['仕入先・発注条件を決める','在庫・棚卸ルールを整える','返品・不良品対応を決める'],
+        ['開業届・会計方法を整える','決済端末・レジを設定する','保険・防犯対策を確認する'],
+        ['価格表示・表示義務を確認する','接客・返品対応を共有する','開店後の売上・在庫を確認する']
+      ],
+      ec:[
+        ['商品・ターゲット・利益率を決める','販売チャネルを選ぶ','初期費用と広告費を見積もる'],
+        ['ショップ名・ドメインを決める','販売ページの構成を作る','配送可能地域を決める'],
+        ['特定商取引法表示を作成する','利用規約・返品条件を整える','個人情報の取扱いを整理する'],
+        ['仕入先・在庫連携を決める','梱包資材・配送会社を選ぶ','欠品時の対応を決める'],
+        ['決済サービスを設定する','問い合わせ窓口を整える','受注・発送の手順を作る'],
+        ['テスト注文を行う','商品画像・価格表示を確認する','公開後の問い合わせを確認する']
+      ],
+      petshop:[
+        ['扱う動物・サービスを決める','資金・人員・営業時間を計画する','繁殖や預かりの有無を整理する'],
+        ['飼養施設・隔離場所を計画する','換気・清掃・給排水を確認する','近隣環境・管理規約を確認する'],
+        ['動物取扱業の種別を確認する','動物取扱責任者の要件を確認する','自治体へ事前相談する'],
+        ['施設基準に沿って設備を整える','登録申請書類を準備する','標識・説明書の要件を確認する'],
+        ['獣医師・仕入先との連携を整える','健康管理・記録帳簿を作る','保険・緊急対応を決める'],
+        ['登録完了を確認する','動物の表示・説明を確認する','日常点検・記録を開始する']
+      ],
+      salon:[
+        ['客層・メニュー・席数を決める','資金・売上計画を作る','スタッフ体制を決める'],
+        ['物件用途・契約条件を確認する','作業室・待合・手洗いを確認する','給排水・換気・電気容量を確認する'],
+        ['保健所に図面を相談する','開設届に必要な内容を確認する','管理美容師などの要件を確認する'],
+        ['内装・設備を基準に沿って整える','検査日程を確認する','必要書類を準備する'],
+        ['開業届・会計を整える','予約・決済・顧客管理を設定する','雇用時の労務手続きを確認する'],
+        ['保健所検査を受ける','衛生管理手順を共有する','開店準備を完了する']
+      ],
+      minpaku:[
+        ['運営目的・宿泊形態を決める','収支・清掃・管理体制を計画する','自宅か投資物件かを整理する'],
+        ['用途地域・物件用途を確認する','賃貸借契約・管理規約を確認する','近隣への影響を確認する'],
+        ['住宅宿泊事業か許可制かを確認する','自治体の上乗せ条例を確認する','届出先・相談窓口を確認する'],
+        ['消防設備・避難経路を整える','衛生・ごみ出しルールを整える','宿泊者名簿などの管理を確認する'],
+        ['予約サイト・利用規約を整える','本人確認・緊急連絡体制を整える','近隣対応・騒音対策を決める'],
+        ['届出番号等を表示する','運用テストを行う','定期報告・記録管理を開始する']
+      ],
+      company:[
+        ['事業目的・会社形態を決める','株主・役員・資本金を決める','設立日と本店所在地を決める'],
+        ['商号の重複・使用可否を確認する','本店所在地の使用権限を確認する','印鑑・電子証明を準備する'],
+        ['定款の記載事項を整理する','公証役場への手続きを確認する','電子定款の方法を決める'],
+        ['発起人名義の口座を準備する','払込証明に必要な資料を整える','資本金払込を記録する'],
+        ['登記申請書を作成する','添付書類・登録免許税を確認する','法務局へ申請する'],
+        ['法人番号・登記完了を確認する','税務・都道府県・市区町村へ届出する','社会保険・労働保険の要否を確認する']
+      ],
+      'sole-proprietor':[
+        ['事業内容・顧客・収益源を整理する','屋号・開始日を決める','事業用口座を検討する'],
+        ['業種別の許認可を確認する','自宅・賃貸物件での営業可否を確認する','必要な保険を確認する'],
+        ['開業届を準備する','青色申告承認申請の期限を確認する','インボイス登録の要否を検討する'],
+        ['会計ソフト・帳簿方法を選ぶ','請求書・見積書の様式を整える','領収書の保管方法を決める'],
+        ['販売ページ・営業資料を作る','契約条件・利用規約を整える','初回顧客の対応フローを作る']
+      ],
+      purchase:[
+        ['購入目的・希望条件を整理する','自己資金・諸費用を試算する','購入期限を決める'],
+        ['年収・返済負担率を確認する','金融機関の事前審査を行う','借入条件を比較する'],
+        ['物件情報・周辺環境を調べる','内見で建物状態を確認する','管理状況・修繕履歴を確認する'],
+        ['重要事項説明を確認する','境界・法令・契約条件を確認する','手付金・解除条件を確認する'],
+        ['売買契約書に署名する','ローン本審査を進める','火災保険・登記準備をする'],
+        ['残代金・固定資産税精算を確認する','鍵・関係書類を受け取る','登記完了を確認する']
+      ],
+      sale:[
+        ['売却理由・希望価格を整理する','残債・税金・諸費用を確認する','売却時期を決める'],
+        ['複数社に査定を依頼する','媒介契約の種類を確認する','販売価格・戦略を決める'],
+        ['室内・書類を整理する','内見対応・広告内容を確認する','告知事項を整理する'],
+        ['購入申込の条件を比較する','引渡し時期・付帯設備を調整する','契約不適合責任等を確認する'],
+        ['契約書・重要事項説明を確認する','手付金・解除条件を確認する','残置物・引越し計画を立てる'],
+        ['抵当権抹消の準備をする','残代金・精算を確認する','鍵・書類を引き渡す']
+      ],
+      'realestate-handover':[
+        ['契約書の引渡し日・条件を確認する','特約・解除条件を整理する','関係者の連絡先を共有する'],
+        ['ローン承認期限を確認する','手付解除・違約解除の条件を確認する','必要な承認書類を確認する'],
+        ['残代金・諸費用を試算する','固定資産税等の精算を確認する','振込先・決済場所を確認する'],
+        ['登記識別情報・印鑑証明を準備する','司法書士と必要書類を確認する','抵当権抹消の段取りを確認する'],
+        ['着金・書類確認の手順を確認する','鍵・付属書類を引き渡す','設備表・物件状況を確認する'],
+        ['登記完了を確認する','各種名義変更を進める','税務上の保管書類を整理する']
+      ],
+      lease:[
+        ['家賃・エリア・入居時期を決める','初期費用・更新費用を確認する','必要な設備条件を整理する'],
+        ['申込書・本人確認書類を準備する','保証会社・連帯保証人の条件を確認する','審査結果と期限を確認する'],
+        ['重要事項説明を受ける','契約期間・解約予告を確認する','禁止事項・原状回復条件を確認する'],
+        ['初期費用の内訳を確認する','契約書に署名・押印する','保険加入・ライフライン手配をする'],
+        ['室内の傷・設備を記録する','鍵・入居案内を受け取る','管理会社連絡先を確認する']
+      ],
+      'used-goods':[
+        ['取り扱う品目・仕入方法を決める','営業所・オンライン販売の形態を整理する','管理責任者を決める'],
+        ['営業所の使用権限を確認する','欠格事由に該当しないか確認する','必要書類の発行先を確認する'],
+        ['申請書・略歴書等を準備する','URL届出の要否を確認する','手数料・受付方法を確認する'],
+        ['営業所所在地を管轄する警察署に相談する','申請を行う','補正依頼に対応する'],
+        ['許可標識を準備する','本人確認・帳簿の運用を整える','盗品等の確認方法を整える'],
+        ['許可番号を表示する','変更届・更新不要の扱いを確認する','取引記録を保存する']
+      ],
+      'construction-license':[
+        ['一般・特定・知事・大臣許可を確認する','必要な業種を整理する','更新・追加の目的を確認する'],
+        ['経営業務・専任技術者等の要件を確認する','財産的基礎・社会保険加入を確認する','営業所要件を確認する'],
+        ['登記事項・納税証明等を収集する','実務経験・資格資料を整理する','申請書の記載内容を確認する'],
+        ['都道府県・地方整備局の手引きを確認する','予約・相談の要否を確認する','申請手数料を確認する'],
+        ['申請書を提出する','補正・追加資料に対応する','許可通知を確認する'],
+        ['標識・帳簿を整える','決算変更届などの期限を管理する','更新期限を記録する']
+      ],
+      'realestate-license':[
+        ['法人か個人かを決める','営業所・営業地域を決める','免許区分を確認する'],
+        ['専任宅建士の人数を確認する','事務所の独立性・使用権限を確認する','欠格事由を確認する'],
+        ['登記簿・身分証明等を収集する','宅建士の登録資料を確認する','申請書を作成する'],
+        ['免許権者・手引きを確認する','申請予約・手数料を確認する','申請・補正対応を行う'],
+        ['保証協会または供託の手続きを確認する','営業保証金等を手配する','標識・帳簿を準備する'],
+        ['免許証を確認する','宅建業者名簿等の手続きを確認する','変更届・更新期限を管理する']
+      ]
+    };
+    function createDraft(id,title,category,stageNames,source,isBuilding){
+      return {id:id,title:title,category:category,isBuilding:!!isBuilding,steps:stageNames.map(function(name,index){return {title:name,items:(draftSmallItems[id]&&draftSmallItems[id][index])||['前提条件・対象範囲を確認する','必要書類・提出先を確認する','公式情報・地域要件を確認する'],summary:'「'+name+'」に関するAI下書きです。実行前に、条件や最新の公式情報を確認してください。',source:source}})};
+    }
+    var flowLibrary=[
+      {id:'new-house',title:'新築住宅を設計する',category:'建築',isBuilding:true,steps:originalBuildingSteps},
+      createDraft('renovation','住宅をリフォームする','建築',['要望・予算を整理する','現地調査を行う','法規・管理規約を確認する','基本計画を作る','見積・契約を行う','着工・工事監理','完了確認・引き渡し'],officialSources.mlit,true),
+      createDraft('store-design','店舗を設計・施工する','建築',['業態・出店条件を整理する','物件・現地を調査する','法規・設備条件を確認する','基本計画を作る','実施設計・見積を行う','各種届出・工事を進める','完了確認・開店準備'],officialSources.mlit,true),
+      createDraft('building-confirmation','建築確認申請を進める','建築',['計画条件を確認する','必要図書を整理する','申請先・審査機関を確認する','申請図書を作成する','申請・補正対応を行う','確認済証を受領する'],officialSources.mlit,true),
+      createDraft('restaurant','飲食店を開業する','開業',['事業計画・資金計画を作る','物件・設備条件を確認する','保健所への相談・営業許可準備','消防・警察・自治体への確認','開業届・税務・労務の準備','開店準備・営業開始'],officialSources.mhlw,false),
+      createDraft('cafe','カフェを開業する','開業',['コンセプト・資金計画を作る','物件を選ぶ','保健所・消防へ事前相談する','内装・設備を整える','営業許可・開業手続きを行う','開店準備を行う'],officialSources.mhlw,false),
+      createDraft('retail','物販店を開業する','開業',['販売商品・収支計画を整理する','出店場所・販売形態を決める','許認可・表示ルールを確認する','仕入先・在庫管理を整える','税務・決済・保険を準備する','開店・販売開始'],officialSources.nta,false),
+      createDraft('ec','ネットショップを開業する','開業',['販売商品・収益計画を決める','販売方法・ショップ基盤を選ぶ','特定商取引法・表示を確認する','仕入れ・物流を整える','決済・顧客対応を設定する','公開・販売開始'],officialSources.egov,false),
+      createDraft('petshop','ペットショップを開業する','開業',['事業計画・扱う動物を整理する','物件・飼養設備を確認する','動物取扱業の登録を確認する','自治体へ事前相談する','登録・開業準備を行う','営業開始・記録管理'],officialSources.env,false),
+      createDraft('salon','美容室を開業する','開業',['コンセプト・資金計画を作る','物件・設備を確認する','保健所へ事前相談する','開設届・検査を準備する','税務・採用・予約体制を整える','開店する'],officialSources.mhlw,false),
+      createDraft('minpaku','民泊を始める','開業',['運営形態・物件条件を確認する','地域ルール・管理規約を確認する','届出・許可の要否を確認する','消防・衛生面を整える','予約・運営体制を準備する','届出後に運営開始'],officialSources.mlit,false),
+      createDraft('company','株式会社を設立する','事業',['事業内容・株主構成を決める','商号・本店所在地を確認する','定款を作成・認証する','資本金を払い込む','設立登記を申請する','税務・社会保険などの届出を行う'],officialSources.moj,false),
+      createDraft('sole-proprietor','個人事業を始める','事業',['事業内容・屋号を決める','必要な許認可を確認する','開業届・青色申告を検討する','口座・会計・契約環境を整える','販売・営業を開始する'],officialSources.nta,false),
+      createDraft('purchase','不動産を購入する','不動産',['予算・購入条件を整理する','資金計画・ローン事前審査','物件を探し・内見する','重要事項・契約条件を確認する','売買契約を締結する','ローン契約・引渡し準備','決済・引渡し・登記'],officialSources.mlit,false),
+      createDraft('sale','不動産を売却する','不動産',['売却目的・条件を整理する','査定・媒介契約を行う','販売準備・内見対応を行う','買主候補と条件を調整する','売買契約を締結する','引渡し準備を行う','決済・引渡しを行う'],officialSources.mlit,false),
+      createDraft('realestate-handover','不動産売買の契約から引渡しまで','不動産',['契約内容・期限を確認する','ローン特約などの条件を確認する','残代金・精算の準備をする','必要書類・登記を準備する','決済・鍵の引渡しを行う','引渡し後の手続きを確認する'],officialSources.mlit,false),
+      createDraft('lease','賃貸借契約を締結する','不動産',['希望条件・物件条件を確認する','申込・審査に必要な情報を整える','重要事項説明を確認する','契約条件・費用を確認する','契約を締結する','入居・引渡し準備を行う'],officialSources.mlit,false),
+      createDraft('used-goods','古物商許可を取得する','許認可',['営業形態・取扱品目を整理する','営業所・管理責任者を確認する','必要書類を準備する','警察署へ申請する','許可後の表示・帳簿を整える','営業開始後の管理を行う'],officialSources.police,false),
+      createDraft('construction-license','建設業許可を取得する','許認可',['許可区分・業種を確認する','要件を確認する','必要書類・証明書を収集する','申請先へ事前相談する','申請・補正対応を行う','許可後の届出・更新管理を行う'],officialSources.mlit,false),
+      createDraft('realestate-license','宅地建物取引業免許を取得する','許認可',['営業形態・事務所要件を確認する','専任宅建士などの要件を確認する','必要書類を準備する','申請先へ相談・申請する','保証協会等の手続きを行う','営業開始後の管理を行う'],officialSources.mlit,false)
+    ];
+    var activeFlowId=state.activeFlowId||'new-house';
+    function flowById(id){return flowLibrary.find(function(flow){return flow.id===id})||flowLibrary[0]}
+    function flowIcon(flow){var icons={建築:'🏗️',開業:'🏪',事業:'💼',不動産:'🏠',許認可:'📜'};return icons[flow.category]||'🧭'}
+    state.flowOverrides=state.flowOverrides||{};
+    Object.keys(state.flowOverrides).forEach(function(id){var saved=state.flowOverrides[id],flow=flowById(id);if(saved&&flow){if(saved.title)flow.title=saved.title;if(Array.isArray(saved.steps))flow.steps=saved.steps}});
+    function persistFlowState(){
+      state.flowProgress=state.flowProgress||{};
+      state.flowProgress[activeFlowId]={current:state.current,checks:state.checks,conditions:state.conditions};
+      state.activeFlowId=activeFlowId;
+    }
+    function selectLibraryFlow(id){
+      persistFlowState();
+      var flow=flowById(id),saved=(state.flowProgress||{})[flow.id]||{};
+      activeFlowId=flow.id;
+      steps.splice.apply(steps,[0,steps.length].concat(JSON.parse(JSON.stringify(flow.steps))));
+      state.current=saved.current||0;state.checks=saved.checks||{};state.conditions=saved.conditions||{};state.activeFlowId=flow.id;
+      document.querySelector('#workflow h1').textContent=flow.title;
+      document.querySelector('.region').style.display=flow.isBuilding?'flex':'none';
+      state.recent=[flow.title].concat((state.recent||[]).filter(function(item){return item!==flow.title&&item!==flow.id})).slice(0,6);
+      save();renderWorkflow();show('workflow');
+    }
+    function renderFlowLibrary(query){
+      var cards=document.querySelector('#home > .cards');
+      var heading=document.querySelector('#home > h2');
+      heading.textContent='AIフローライブラリ';
+      cards.replaceChildren();
+      var q=(query||'').trim().toLowerCase();
+      flowLibrary.filter(function(flow){return !q||[flow.title,flow.category].join(' ').toLowerCase().includes(q)}).forEach(function(flow){
+        var card=document.createElement('article');card.className='card';
+        var icon=document.createElement('span');icon.textContent=flowIcon(flow);icon.style.cssText='font-size:25px;background:#edf4ff;border-radius:10px;padding:7px 9px;line-height:1;display:inline-flex';
+        var category=document.createElement('span');category.className='muted';category.style.fontSize='13px';category.textContent=flow.category+'・AI下書き';
+        var title=document.createElement('h3');title.textContent=flow.title;
+        var note=document.createElement('p');note.textContent='大まかな流れを確認して、必要に応じて詳細を追加できます。';
+        var button=document.createElement('button');button.className='primary';button.textContent='フローを開く';button.onclick=function(){selectLibraryFlow(flow.id)};
+        card.append(icon,category,title,note,button);cards.appendChild(card);
+      });
+    }
+    function renderRecentLibrary(){
+      var wrap=document.getElementById('recentWrap'),list=document.getElementById('recentList');
+      var normalized=(state.recent||[]).map(function(record){var flow=flowLibrary.find(function(candidate){return candidate.id===record||candidate.title===record});return flow?flow.title:record}).filter(function(title){return flowLibrary.some(function(flow){return flow.title===title})});
+      state.recent=normalized.filter(function(title,index){return normalized.indexOf(title)===index}).slice(0,6);save();
+      list.replaceChildren();wrap.style.display=state.recent.length?'block':'none';
+      state.recent.forEach(function(title){var flow=flowLibrary.find(function(candidate){return candidate.title===title});if(!flow)return;var card=document.createElement('article');card.className='card';var icon=document.createElement('span');icon.textContent=flowIcon(flow);icon.style.cssText='font-size:25px;background:#edf4ff;border-radius:10px;padding:7px 9px;line-height:1;display:inline-flex';var heading=document.createElement('h3');heading.textContent=flow.title;var note=document.createElement('p');note.textContent='前回の続きから確認できます。';var button=document.createElement('button');button.className='primary';button.textContent='フローを開く';button.onclick=function(){selectLibraryFlow(flow.id)};card.append(icon,heading,note,button);list.appendChild(card)});
+    }
+    document.getElementById('search').placeholder='例：飲食店、古物商、不動産購入';
+    document.getElementById('searchGo').onclick=function(){renderFlowLibrary(document.getElementById('search').value)};
+    document.getElementById('search').onkeydown=function(event){if(event.key==='Enter')renderFlowLibrary(event.target.value)};
+    document.getElementById('copyPrivate').onclick=function(){
+      persistFlowState();var flow=flowById(activeFlowId);
+      state.privateFlows.unshift({id:String(Date.now()),title:flow.title+'（自社用）',data:{flowId:activeFlowId,current:state.current,checks:JSON.parse(JSON.stringify(state.checks)),conditions:JSON.parse(JSON.stringify(state.conditions))}});
+      save();renderPrivateLibrary();show('private');toast('自社用フローにコピーしました');
+    };
+    function renderPrivateLibrary(){
+      var list=document.getElementById('privateList');list.replaceChildren();
+      if(!state.privateFlows.length){var empty=document.createElement('p');empty.className='muted';empty.textContent='自社用フローはまだありません。公開フローからコピーして作成できます。';list.appendChild(empty);return}
+      state.privateFlows.forEach(function(saved){
+        var card=document.createElement('article');card.className='card';var title=document.createElement('h3');title.textContent=saved.title;
+        var note=document.createElement('p');note.textContent='この端末だけに保存される非公開フローです。';
+        var open=document.createElement('button');open.className='primary';open.textContent='開く';open.onclick=function(){var data=saved.data||{};selectLibraryFlow(data.flowId||'new-house');state.current=data.current||0;state.checks=data.checks||{};state.conditions=data.conditions||{};save();renderWorkflow();show('workflow')};
+        var rename=document.createElement('button');rename.className='secondary';rename.style.marginTop='8px';rename.textContent='名前変更';rename.onclick=function(){var next=prompt('フロー名',saved.title);if(next&&next.trim()){saved.title=next.trim();save();renderPrivateLibrary()}};
+        var remove=document.createElement('button');remove.className='secondary';remove.style.margin='8px 0 0 8px';remove.textContent='削除';remove.onclick=function(){if(confirm('この自社用フローを削除しますか？')){state.privateFlows=state.privateFlows.filter(function(flow){return flow.id!==saved.id});save();renderPrivateLibrary()}};
+        card.append(title,note,open,rename,remove);list.appendChild(card);
+      });
+    }
+    document.querySelector('[data-view="private"]').onclick=function(){renderPrivateLibrary();show('private')};
+    document.querySelector('[data-view="home"]').onclick=function(){renderRecentLibrary();renderFlowLibrary('');show('home')};
+    selectLibraryFlow(activeFlowId);
+    renderRecentLibrary();
+    renderFlowLibrary('');
+    show('home');
+  </script>
+  <script>
+    /* Local hierarchy editor: large step -> middle group -> small checklist item. */
+    (function(){
+      var editorCss=document.createElement('style');
+      editorCss.textContent='.medium-group{border:1px solid #dfe5ee;border-radius:9px;margin:8px 0;padding:9px}.medium-group h4{font-size:14px;margin:0 0 6px;color:#344054}.editor-dialog{width:min(900px,calc(100% - 28px));max-height:88vh;overflow:auto}.editor-step{border:1px solid #dfe5ee;border-radius:12px;padding:14px;margin:12px 0;background:#fff}.editor-middle{border-left:3px solid #1d63e9;padding:10px 0 0 12px;margin:12px 0}.editor-input{width:100%;padding:9px;border:1px solid #dfe5ee;border-radius:8px;margin:5px 0}.editor-row{display:flex;gap:8px;align-items:center}.editor-row .editor-input{flex:1}.editor-label{font-size:12px;color:#667085;font-weight:650}.editor-add{font-size:13px;padding:7px 9px;margin-top:5px}.editor-danger{color:#b42318;border-color:#fecdca;background:#fff}.editor-note{font-size:13px;line-height:1.55;color:#475467;background:#edf4ff;padding:10px;border-radius:8px}.editor-top{position:sticky;top:-22px;background:#fff;padding:4px 0 12px;z-index:1}';
+      document.head.appendChild(editorCss);
+
+      function ensureMiddle(step){
+        if(!Array.isArray(step.middle)||!step.middle.length){step.middle=[{title:'必要な確認項目',items:Array.isArray(step.items)?step.items.slice():[]}];}
+        step.middle.forEach(function(group){if(!Array.isArray(group.items))group.items=[]});
+        return step.middle;
+      }
+      function allItems(step){return ensureMiddle(step).reduce(function(list,group){return list.concat(group.items)},[])}
+      function sourceBlock(source){
+        var box=document.createElement('div');box.className='source';
+        var org=document.createElement('strong');org.textContent=source.org;
+        var link=document.createElement('a');link.href=source.url;link.target='_blank';link.rel='noopener';link.textContent=source.title+' を開く';
+        box.append(org,link);return box;
+      }
+      function accordion(title,open){
+        var wrap=document.createElement('div');wrap.className='section '+(open?'open':'');
+        var button=document.createElement('button');var label=document.createElement('span');label.textContent=title;var icon=document.createElement('span');icon.textContent=open?'⌃':'⌄';button.append(label,icon);
+        var body=document.createElement('div');body.className='body';button.onclick=function(){wrap.classList.toggle('open');icon.textContent=wrap.classList.contains('open')?'⌃':'⌄'};wrap.append(button,body);return {el:wrap,body:body};
+      }
+      renderWorkflow=function(){
+        var selected=flowById(activeFlowId),index=Math.min(state.current,Math.max(steps.length-1,0));
+        document.querySelector('#workflow h1').textContent=selected.title;
+        document.getElementById('currentTitle').textContent=steps[index]?steps[index].title:'未設定';
+        document.getElementById('updated').textContent='最終更新：2026年7月12日';
+        var condition=state.conditions||{},location=[condition.prefecture,condition.city].filter(Boolean).join(' ')||'未設定';
+        document.getElementById('regionText').textContent='対象地域：'+location;
+        document.getElementById('conditionText').textContent='建物条件：'+([condition.projectType,condition.use,condition.structure,condition.floors].filter(Boolean).join('・')||'未設定')+(condition.memo?' ／ '+condition.memo:'');
+        var timeline=document.getElementById('timeline');timeline.replaceChildren();
+        steps.forEach(function(step,stepIndex){
+          var article=document.createElement('article');article.className='step '+(stepIndex<state.current?'done ':'');
+          var dot=document.createElement('span');dot.className='dot';
+          var box=document.createElement('div');box.className='stepbox';
+          var title=document.createElement('button');title.className='step-title';var text=document.createElement('span');text.textContent=step.title;var mark=document.createElement('span');mark.textContent='⌄';title.append(text,mark);
+          var detail=document.createElement('div');detail.className='detail';title.onclick=function(){article.classList.toggle('open');mark.textContent=article.classList.contains('open')?'⌃':'⌄'};
+          var required=accordion('必要な確認項目',true);
+          ensureMiddle(step).forEach(function(group,groupIndex){
+            var groupBox=document.createElement('div');groupBox.className='medium-group';var groupTitle=document.createElement('h4');groupTitle.textContent='中項目：'+group.title;groupBox.appendChild(groupTitle);
+            group.items.forEach(function(item,itemIndex){
+              var label=document.createElement('label');label.className='check';var input=document.createElement('input');input.type='checkbox';var checkKey=stepIndex+':'+groupIndex+':'+itemIndex;var legacyKey=stepIndex+':'+itemIndex;
+              input.checked=!!(state.checks[checkKey]||state.checks[legacyKey]);input.onchange=function(){state.checks[checkKey]=input.checked;delete state.checks[legacyKey];updateStepProgress(stepIndex)};label.append(input,' '+item);groupBox.appendChild(label);
+            });required.body.appendChild(groupBox);
+          });detail.appendChild(required.el);
+          var explanation=accordion('解説',false);explanation.body.textContent=step.summary||'この工程の目的・前提条件を整理します。';detail.appendChild(explanation.el);
+          var mistakes=accordion('よくあるミス',false);mistakes.body.textContent='地域や条件により必要な手続き・図書は変わります。AIの下書きだけで判断せず、公式情報と関係機関の案内を確認してください。';detail.appendChild(mistakes.el);
+          var sources=accordion('公式資料',false);var note=document.createElement('p');note.textContent='重要な判断・申請・契約の前には、必ず公式資料の原文を確認してください。';sources.body.append(note,sourceBlock(step.source));detail.appendChild(sources.el);
+          box.append(title,detail);article.append(dot,box);timeline.appendChild(article);
+        });
+      };
+      updateStepProgress=function(stepIndex){
+        var complete=ensureMiddle(steps[stepIndex]).every(function(group,groupIndex){return group.items.every(function(_,itemIndex){return !!state.checks[stepIndex+':'+groupIndex+':'+itemIndex]})});
+        if(complete)state.current=Math.max(state.current,Math.min(stepIndex+1,steps.length-1));
+        persistFlowState();save();renderWorkflow();
+      };
+
+      var actionArea=document.querySelector('.current .actions');
+      var editButton=document.createElement('button');editButton.id='editFlow';editButton.className='secondary';editButton.textContent='フローを編集';actionArea.appendChild(editButton);
+      var feedbackButton=document.createElement('button');feedbackButton.id='reportIssue';feedbackButton.className='secondary';feedbackButton.textContent='情報の問題を報告';actionArea.appendChild(feedbackButton);
+      var dialog=document.createElement('dialog');dialog.className='editor-dialog';dialog.id='flowEditor';document.body.appendChild(dialog);
+      var editDraft=null;
+      function clone(value){return JSON.parse(JSON.stringify(value))}
+      function smallButton(label,handler,danger){var button=document.createElement('button');button.type='button';button.className='secondary editor-add'+(danger?' editor-danger':'');button.textContent=label;button.onclick=handler;return button}
+      function input(value,onChange){var field=document.createElement('input');field.className='editor-input';field.value=value;field.oninput=function(){onChange(field.value)};return field}
+      function renderEditor(){
+        dialog.replaceChildren();var top=document.createElement('div');top.className='editor-top';var heading=document.createElement('h2');heading.textContent='フローを編集';var note=document.createElement('p');note.className='editor-note';note.textContent='大項目・中項目・小項目を自由に追加、名前変更、削除できます。変更はこの端末に保存され、バックアップにも含まれます。';top.append(heading,note);dialog.appendChild(top);
+        var flowLabel=document.createElement('div');flowLabel.className='editor-label';flowLabel.textContent='フロー名';dialog.append(flowLabel,input(editDraft.title,function(value){editDraft.title=value}));
+        editDraft.steps.forEach(function(step,stepIndex){
+          var card=document.createElement('section');card.className='editor-step';var bigLabel=document.createElement('div');bigLabel.className='editor-label';bigLabel.textContent='大項目 '+(stepIndex+1);card.append(bigLabel,input(step.title,function(value){step.title=value}));
+          card.appendChild(smallButton('この大項目を削除',function(){if(editDraft.steps.length===1){toast('大項目は1つ以上必要です');return}editDraft.steps.splice(stepIndex,1);renderEditor()},true));
+          ensureMiddle(step).forEach(function(group,groupIndex){
+            var middle=document.createElement('div');middle.className='editor-middle';var middleLabel=document.createElement('div');middleLabel.className='editor-label';middleLabel.textContent='中項目 '+(groupIndex+1);middle.append(middleLabel,input(group.title,function(value){group.title=value}));
+            middle.appendChild(smallButton('この中項目を削除',function(){if(ensureMiddle(step).length===1){toast('中項目は1つ以上必要です');return}step.middle.splice(groupIndex,1);renderEditor()},true));
+            group.items.forEach(function(item,itemIndex){var row=document.createElement('div');row.className='editor-row';row.append(input(item,function(value){group.items[itemIndex]=value}),smallButton('削除',function(){group.items.splice(itemIndex,1);renderEditor()},true));middle.appendChild(row)});
+            middle.appendChild(smallButton('＋ 小項目を追加',function(){group.items.push('新しい確認項目');renderEditor()}));card.appendChild(middle);
+          });
+          card.appendChild(smallButton('＋ 中項目を追加',function(){ensureMiddle(step).push({title:'新しい中項目',items:['新しい確認項目']});renderEditor()}));dialog.appendChild(card);
+        });
+        dialog.appendChild(smallButton('＋ 大項目を追加',function(){editDraft.steps.push({title:'新しい大項目',middle:[{title:'必要な確認項目',items:['新しい確認項目']}],summary:'この工程の目的を記入してください。',source:officialSources.egov});renderEditor()}));
+        var controls=document.createElement('div');controls.className='right';var cancel=smallButton('キャンセル',function(){dialog.close()});var saveButton=document.createElement('button');saveButton.className='primary';saveButton.textContent='変更を保存';saveButton.onclick=function(){
+          editDraft.title=editDraft.title.trim()||'名称未設定のフロー';editDraft.steps.forEach(function(step){step.title=step.title.trim()||'名称未設定の大項目';ensureMiddle(step).forEach(function(group){group.title=group.title.trim()||'名称未設定の中項目';group.items=group.items.map(function(item){return item.trim()}).filter(Boolean);if(!group.items.length)group.items=['確認項目を追加してください'];step.items=allItems(step)})});
+          var target=flowById(activeFlowId);target.title=editDraft.title;target.steps=clone(editDraft.steps);state.flowOverrides=state.flowOverrides||{};state.flowOverrides[activeFlowId]={title:target.title,steps:clone(target.steps)};steps.splice.apply(steps,[0,steps.length].concat(clone(target.steps)));state.current=Math.min(state.current,Math.max(steps.length-1,0));state.checks={};persistFlowState();save();renderFlowLibrary('');renderWorkflow();dialog.close();toast('フローを保存しました');
+        };controls.append(cancel,saveButton);dialog.appendChild(controls);
+      }
+      editButton.onclick=function(){var flow=flowById(activeFlowId);editDraft={title:flow.title,steps:clone(flow.steps)};editDraft.steps.forEach(ensureMiddle);renderEditor();dialog.showModal()};
+
+      state.feedbackReports=state.feedbackReports||[];
+      var feedbackDialog=document.createElement('dialog');feedbackDialog.className='editor-dialog';feedbackDialog.id='feedbackDialog';
+      feedbackDialog.innerHTML='<h2>情報の問題を報告</h2><p class="editor-note">この端末内版では、報告内容は端末に保存されます。公開版では管理者へ送信する仕組みに移行します。</p><div class="field"><label>内容</label><select id="feedbackReason"><option value="outdated">情報が古い</option><option value="incorrect">事実と異なる</option><option value="broken_link">リンク切れ</option><option value="unclear">分かりにくい</option><option value="other">その他</option></select></div><div class="field"><label>補足</label><textarea id="feedbackNote" placeholder="どの項目の、どこが気になったかを入力してください"></textarea></div><div class="right"><button type="button" id="feedbackCancel" class="secondary">キャンセル</button><button type="button" id="feedbackSave" class="primary">保存する</button></div>';
+      document.body.appendChild(feedbackDialog);
+      feedbackButton.onclick=function(){document.getElementById('feedbackNote').value='';feedbackDialog.showModal()};
+      document.getElementById('feedbackCancel').onclick=function(){feedbackDialog.close()};
+      document.getElementById('feedbackSave').onclick=function(){var selected=flowById(activeFlowId),reason=document.getElementById('feedbackReason').value,note=document.getElementById('feedbackNote').value.trim();state.feedbackReports.unshift({id:String(Date.now()),flowId:activeFlowId,flowTitle:selected.title,stepTitle:steps[state.current]?steps[state.current].title:'未設定',reason:reason,note:note,createdAt:new Date().toLocaleString('ja-JP'),status:'未対応'});save();feedbackDialog.close();renderFeedbackReports();toast('報告を保存しました')};
+      var feedbackPanel=document.createElement('section');feedbackPanel.className='panel';feedbackPanel.innerHTML='<h2>改善メモ・通報一覧</h2><p class="muted">端末内に保存された報告です。公開版では管理画面で確認できるようにします。</p><div id="feedbackList"></div>';
+      document.getElementById('sources').appendChild(feedbackPanel);
+      function renderFeedbackReports(){var list=document.getElementById('feedbackList');if(!list)return;list.replaceChildren();if(!state.feedbackReports.length){var empty=document.createElement('p');empty.className='muted';empty.textContent='保存された報告はありません。';list.appendChild(empty);return}state.feedbackReports.forEach(function(report,index){var row=document.createElement('div');row.className='list-row';var text=document.createElement('div');var title=document.createElement('strong');title.textContent=report.flowTitle+' ／ '+report.stepTitle;var detail=document.createElement('p');detail.textContent=report.reason+' ・ '+report.createdAt+(report.note?' ／ '+report.note:'');text.append(title,detail);var remove=document.createElement('button');remove.className='secondary';remove.textContent='削除';remove.onclick=function(){state.feedbackReports.splice(index,1);save();renderFeedbackReports()};row.append(text,remove);list.appendChild(row)})}
+      document.querySelector('[data-view="sources"]').onclick=function(){renderSources();renderFeedbackReports();show('sources')};
+      renderWorkflow();
+      renderFeedbackReports();
+    })();
+  </script>
+  <script>if('serviceWorker' in navigator&&location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));</script>
+</body>
+</html>

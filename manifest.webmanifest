@@ -1,0 +1,8 @@
+{
+  "name": "FlowAtlas 自分用版",
+  "short_name": "FlowAtlas",
+  "start_url": "./flowatlas-self-use.html",
+  "display": "standalone",
+  "background_color": "#f6f8fb",
+  "theme_color": "#1d63e9"
+}
